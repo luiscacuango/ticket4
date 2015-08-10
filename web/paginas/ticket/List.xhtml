@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTicketTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="TicketListForm">
+                <p:panel header="#{bundle.ListTicketTitle}">
+                    <p:dataTable id="datalist" value="#{ticketController.items}" var="item"
+                                 selectionMode="single" selection="#{ticketController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idTicket}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTicketTitle_idTicket}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idTicket}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTicketTitle_fechsoliTicket}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechsoliTicket}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTicketTitle_estadoSoliTicket}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estadoSoliTicket}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTicketTitle_feciniTicket}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.feciniTicket}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTicketTitle_fecfinTicket}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecfinTicket}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTicketTitle_detalleTicket}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.detalleTicket}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTicketTitle_obserTicket}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.obserTicket}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTicketTitle_estadoTicket}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estadoTicket}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTicketTitle_idDpto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idDpto.nombDpto}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTicketTitle_idEmpl}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEmpl.nombEmpl} #{item.idEmpl.apelEmpl}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTicketTitle_empIdEmpl}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.empIdEmpl.nombEmpl} #{item.empIdEmpl.apelEmpl}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTicketTitle_idPrioridad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPrioridad.detallePrioridad}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{ticketController.prepareCreate}" update=":TicketCreateForm" oncomplete="PF('TicketCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TicketViewForm" oncomplete="PF('TicketViewDialog').show()" disabled="#{empty ticketController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TicketEditForm" oncomplete="PF('TicketEditDialog').show()" disabled="#{empty ticketController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{ticketController.destroy}" update=":growl,datalist" disabled="#{empty ticketController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

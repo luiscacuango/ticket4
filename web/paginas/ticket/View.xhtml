@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TicketViewDlg" widgetVar="TicketViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTicketTitle}">
+            <h:form id="TicketViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ticketController.selected != null}">
+                        <h:outputText value="#{bundle.ViewTicketLabel_idTicket}"/>
+                        <h:outputText value="#{ticketController.selected.idTicket}" title="#{bundle.ViewTicketTitle_idTicket}"/>
+                        <h:outputText value="#{bundle.ViewTicketLabel_fechsoliTicket}"/>
+                        <h:outputText value="#{ticketController.selected.fechsoliTicket}" title="#{bundle.ViewTicketTitle_fechsoliTicket}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTicketLabel_estadoSoliTicket}"/>
+                        <h:outputText value="#{ticketController.selected.estadoSoliTicket}" title="#{bundle.ViewTicketTitle_estadoSoliTicket}"/>
+                        <h:outputText value="#{bundle.ViewTicketLabel_feciniTicket}"/>
+                        <h:outputText value="#{ticketController.selected.feciniTicket}" title="#{bundle.ViewTicketTitle_feciniTicket}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTicketLabel_fecfinTicket}"/>
+                        <h:outputText value="#{ticketController.selected.fecfinTicket}" title="#{bundle.ViewTicketTitle_fecfinTicket}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewTicketLabel_detalleTicket}"/>
+                        <h:outputText value="#{ticketController.selected.detalleTicket}" title="#{bundle.ViewTicketTitle_detalleTicket}"/>
+                        <h:outputText value="#{bundle.ViewTicketLabel_obserTicket}"/>
+                        <h:outputText value="#{ticketController.selected.obserTicket}" title="#{bundle.ViewTicketTitle_obserTicket}"/>
+                        <h:outputText value="#{bundle.ViewTicketLabel_estadoTicket}"/>
+                        <h:outputText value="#{ticketController.selected.estadoTicket}" title="#{bundle.ViewTicketTitle_estadoTicket}"/>
+                        <h:outputText value="#{bundle.ViewTicketLabel_idDpto}"/>
+                        <h:outputText value="#{ticketController.selected.idDpto.nombDpto}" title="#{bundle.ViewTicketTitle_idDpto}"/>
+                        <h:outputText value="#{bundle.ViewTicketLabel_idEmpl}"/>
+                        <h:outputText value="#{ticketController.selected.idEmpl.nombEmpl} #{ticketController.selected.idEmpl.apelEmpl}" title="#{bundle.ViewTicketTitle_idEmpl}"/>
+                        <h:outputText value="#{bundle.ViewTicketLabel_empIdEmpl}"/>
+                        <h:outputText value="#{ticketController.selected.empIdEmpl.nombEmpl} #{ticketController.selected.empIdEmpl.apelEmpl}" title="#{bundle.ViewTicketTitle_empIdEmpl}"/>
+                        <h:outputText value="#{bundle.ViewTicketLabel_idPrioridad}"/>
+                        <h:outputText value="#{ticketController.selected.idPrioridad.detallePrioridad}" title="#{bundle.ViewTicketTitle_idPrioridad}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="TicketViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

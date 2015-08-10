@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FinalizarEditDlg" widgetVar="FinalizarEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Finalizar Ticket">
+            <h:form id="FinalizarEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ticketController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTicketLabel_idTicket}" for="idTicket" />
+                        <p:inputText id="idTicket" disabled="true" value="#{ticketController.selected.idTicket}" title="#{bundle.EditTicketTitle_idTicket}" requiredMessage="#{bundle.EditTicketRequiredMessage_idTicket}"/>
+                        <p:outputLabel value="#{bundle.EditTicketLabel_fechsoliTicket}" for="fechsoliTicket" />
+                        <p:calendar id="fechsoliTicket" disabled="true" pattern="dd/MM/yyyy HH:mm:ss" value="#{ticketController.selected.fechsoliTicket}" title="#{bundle.EditTicketTitle_fechsoliTicket}" requiredMessage="#{bundle.EditTicketRequiredMessage_fechsoliTicket}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTicketLabel_estadoSoliTicket}" for="estadoSoliTicket" />
+                        <p:inputText id="estadoSoliTicket" disabled="true" value="#{ticketController.selected.estadoSoliTicket='Asignado'}" title="#{bundle.EditTicketTitle_estadoSoliTicket}" />
+                        <p:outputLabel value="#{bundle.EditTicketLabel_feciniTicket}" for="feciniTicket" />
+                        <p:calendar id="feciniTicket" disabled="true" pattern="dd/MM/yyyy HH:mm:ss" value="#{ticketController.selected.feciniTicket}" title="#{bundle.EditTicketTitle_feciniTicket}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTicketLabel_fecfinTicket}" for="fecfinTicket" />
+                        <p:calendar id="fecfinTicket" pattern="dd/MM/yyyy HH:mm:ss" value="#{ticketController.selected.fecfinTicket}" title="#{bundle.EditTicketTitle_fecfinTicket}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditTicketLabel_detalleTicket}" for="detalleTicket" />
+                        <p:inputText id="detalleTicket" disabled="true" value="#{ticketController.selected.detalleTicket}" title="#{bundle.EditTicketTitle_detalleTicket}" />
+                        <p:outputLabel value="#{bundle.EditTicketLabel_obserTicket}" for="obserTicket" />
+                        <p:inputText id="obserTicket" value="#{ticketController.selected.obserTicket}" title="#{bundle.EditTicketTitle_obserTicket}" />
+                        <p:outputLabel value="#{bundle.EditTicketLabel_estadoTicket}" for="estadoTicket" />
+                        <p:inputText id="estadoTicket" disabled="true" value="#{ticketController.selected.estadoTicket='Finalizado'}" title="#{bundle.EditTicketTitle_estadoTicket}" />
+                        <p:outputLabel value="#{bundle.EditTicketLabel_idDpto}" for="idDpto" />
+                        <p:selectOneMenu id="idDpto" disabled="true" value="#{ticketController.selected.idDpto}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"
+                                           var="idDptoItem"
+                                           itemValue="#{idDptoItem}" itemLabel="#{idDptoItem.nombDpto}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTicketLabel_idEmpl}" for="idEmpl" />
+                        <p:selectOneMenu id="idEmpl" disabled="true" value="#{ticketController.selected.idEmpl}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{empleadoController.itemsAvailableSelectOne}"
+                                           var="idEmplItem"
+                                           itemValue="#{idEmplItem}" itemLabel="#{idEmplItem.nombEmpl} #{idEmplItem.apelEmpl}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTicketLabel_empIdEmpl}" for="empIdEmpl" />
+                        <p:selectOneMenu id="empIdEmpl" disabled="true" value="#{ticketController.selected.empIdEmpl}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{empleadoController.itemsAvailableSelectOne}"
+                                           var="empIdEmplItem"
+                                           itemValue="#{empIdEmplItem}" itemLabel="#{empIdEmplItem.nombEmpl} #{empIdEmplItem.apelEmpl}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditTicketLabel_idPrioridad}" for="idPrioridad" />
+                        <p:selectOneMenu id="idPrioridad" disabled="true" value="#{ticketController.selected.idPrioridad}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{prioridadController.itemsAvailableSelectOne}"
+                                           var="idPrioridadItem"
+                                           itemValue="#{idPrioridadItem}" itemLabel="#{idPrioridadItem.detallePrioridad}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ticketController.update}" value="#{bundle.Save}" update="display,:SolicitudListForm:datalist,:growl" oncomplete="handleSubmit(args, 'FinalizarEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FinalizarEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
