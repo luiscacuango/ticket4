@@ -40,6 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Ticket.findByFecfinTicket", query = "SELECT t FROM Ticket t WHERE t.fecfinTicket = :fecfinTicket"),
     @NamedQuery(name = "Ticket.findByDetalleTicket", query = "SELECT t FROM Ticket t WHERE t.detalleTicket = :detalleTicket"),
     @NamedQuery(name = "Ticket.findByObserTicket", query = "SELECT t FROM Ticket t WHERE t.obserTicket = :obserTicket"),
+    @NamedQuery(name = "Ticket.findByObserTicketT", query = "SELECT t FROM Ticket t WHERE t.obserTicketT = :obserTicketT"),
     @NamedQuery(name = "Ticket.findByEstadoTicket", query = "SELECT t FROM Ticket t WHERE t.estadoTicket = :estadoTicket")})
 public class Ticket implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -62,12 +63,15 @@ public class Ticket implements Serializable {
     @Column(name = "FECFIN_TICKET")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecfinTicket;
-    @Size(max = 254)
+    @Size(max = 500)
     @Column(name = "DETALLE_TICKET")
     private String detalleTicket;
-    @Size(max = 100)
+    @Size(max = 500)
     @Column(name = "OBSER_TICKET")
     private String obserTicket;
+    @Size(max = 500)
+    @Column(name = "OBSER_TICKET_T")
+    private String obserTicketT;
     @Size(max = 20)
     @Column(name = "ESTADO_TICKET")
     private String estadoTicket;
@@ -150,6 +154,14 @@ public class Ticket implements Serializable {
 
     public void setObserTicket(String obserTicket) {
         this.obserTicket = obserTicket;
+    }
+
+    public String getObserTicketT() {
+        return obserTicketT;
+    }
+
+    public void setObserTicketT(String obserTicketT) {
+        this.obserTicketT = obserTicketT;
     }
 
     public String getEstadoTicket() {

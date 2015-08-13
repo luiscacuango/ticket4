@@ -8,8 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="SolicitudCreateDlg" widgetVar="SolicitudCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSolicitudTitle}">
-            <h:form id="SolicitudCreateForm">
+        <p:dialog id="ClienteCreateDlg" widgetVar="ClienteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="CREAR SOLICITUD DE TICKETS">
+            <h:form id="ClienteCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ticketController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateTicketLabel_idTicket}" for="idTicket" />
@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.CreateTicketLabel_estadoSoliTicket}" for="estadoSoliTicket" />
                         <p:inputText id="estadoSoliTicket" disabled="true" value="#{ticketController.selected.estadoSoliTicket='Solicitado'}" title="#{bundle.CreateTicketTitle_estadoSoliTicket}" />
                         <p:outputLabel value="#{bundle.CreateTicketLabel_detalleTicket}" for="detalleTicket" />
-                        <p:inputText id="detalleTicket" value="#{ticketController.selected.detalleTicket}" title="#{bundle.CreateTicketTitle_detalleTicket}" />
+                        <p:inputTextarea id="detalleTicket" maxlength="500" value="#{ticketController.selected.detalleTicket}" title="#{bundle.CreateTicketTitle_detalleTicket}" />
                         <p:outputLabel value="#{bundle.CreateTicketLabel_idDpto}" for="idDpto" />
                         <p:selectOneMenu id="idDpto" value="#{ticketController.selected.idDpto}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
@@ -34,18 +34,11 @@
                                            var="idEmplItem"
                                            itemValue="#{idEmplItem}" itemLabel="#{idEmplItem.nombEmpl} #{idEmplItem.apelEmpl}"/>
                         </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateTicketLabel_idPrioridad}" for="idPrioridad" />
-                        <p:selectOneMenu id="idPrioridad" value="#{ticketController.selected.idPrioridad}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{prioridadController.itemsAvailableSelectOne}"
-                                           var="idPrioridadItem"
-                                           itemValue="#{idPrioridadItem}" itemLabel="#{idPrioridadItem.detallePrioridad}"/>
-                        </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateTicketLabel_estadoTicket}" for="estadoTicket" />
                         <p:inputText id="estadoTicket" disabled="true" value="#{ticketController.selected.estadoTicket='Pendiente'}" title="#{bundle.CreateTicketTitle_estadoTicket}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{ticketController.create}" value="Guardar" update="display,:SolicitudListForm:datalist,:growl" oncomplete="handleSubmit(args,'SolicitudCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SolicitudCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{ticketController.create}" value="Guardar"  oncomplete="handleSubmit(args,'ClienteCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ClienteCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

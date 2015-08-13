@@ -10,12 +10,12 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListTicketTitle}"></h:outputText>
+            <h:outputText value="Finalizar"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="AsignarListForm">
-                <p:panel header="#{bundle.ListTicketTitle}">
+            <h:form id="SolicitudListForm">
+                <p:panel header="#{bundle.ListSolicitudTitle}">
                     <p:dataTable id="datalist" value="#{ticketController.items}" var="item"
                                  selectionMode="single" selection="#{ticketController.selected}"
                                  paginator="true"
@@ -24,8 +24,8 @@
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
-                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowSelect"   update="finalizarButton createButton viewButton"/>
+                        <p:ajax event="rowUnselect" update="finalizarButton createButton viewButton"/>
 
                         <p:column width="14">
                             <f:facet name="header">
@@ -41,27 +41,11 @@
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
                             </h:outputText>
                         </p:column>
-                        <p:column width="60">
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTicketTitle_estadoSoliTicket}"/>
                             </f:facet>
                             <h:outputText value="#{item.estadoSoliTicket}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTicketTitle_feciniTicket}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.feciniTicket}">
-                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-                            </h:outputText>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTicketTitle_fecfinTicket}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fecfinTicket}">
-                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
-                            </h:outputText>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -75,7 +59,7 @@
                             </f:facet>
                             <h:outputText value="#{item.obserTicket}"/>
                         </p:column>
-                        <p:column width="60">
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTicketTitle_estadoTicket}"/>
                             </f:facet>
@@ -95,28 +79,21 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListTicketTitle_empIdEmpl}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.empIdEmpl.nombEmpl} #{item.empIdEmpl.apelEmpl}"/>
-                        </p:column>
-                        <p:column width="60">
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListTicketTitle_idPrioridad}"/>
                             </f:facet>
                             <h:outputText value="#{item.idPrioridad.detallePrioridad}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="Asignar" update=":AsignarEditForm" oncomplete="PF('AsignarEditDialog').show()" disabled="#{empty ticketController.selected}"/>
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{ticketController.prepareCreate}" update=":AsignarCreateForm" oncomplete="PF('AsignarCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":AsignarViewForm" oncomplete="PF('AsignarViewDialog').show()" disabled="#{empty ticketController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{ticketController.destroy}" update=":growl,datalist" disabled="#{empty ticketController.selected}"/>
+                            <p:commandButton id="finalizarButton" icon="ui-icon-pencil" value="Finalizar" update=":FinalizarEditForm" oncomplete="PF('FinalizarEditDialog').show()" disabled="#{ticketController.selected.estadoTicket=='Finalizado'}" />
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="Solicitar" actionListener="#{ticketController.prepareCreate}" update=":SolicitudCreateForm" oncomplete="PF('SolicitudCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SolicitudViewForm" oncomplete="PF('SolicitudViewDialog').show()" disabled="#{empty ticketController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
             </h:form>
 
+            <ui:include src="Finalizar.xhtml"/>
             <ui:include src="Create.xhtml"/>
-            <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
         </ui:define>
     </ui:composition>

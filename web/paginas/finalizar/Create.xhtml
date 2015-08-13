@@ -8,8 +8,8 @@
 
     <ui:composition>
 
-        <p:dialog id="ClienteCreateDlg" widgetVar="ClienteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="CREAR SOLICITUD DE TICKETS">
-            <h:form id="ClienteCreateForm">
+        <p:dialog id="SolicitudCreateDlg" widgetVar="SolicitudCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSolicitudTitle}">
+            <h:form id="SolicitudCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{ticketController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateTicketLabel_idTicket}" for="idTicket" />
@@ -44,8 +44,8 @@
                         <p:outputLabel value="#{bundle.CreateTicketLabel_estadoTicket}" for="estadoTicket" />
                         <p:inputText id="estadoTicket" disabled="true" value="#{ticketController.selected.estadoTicket='Pendiente'}" title="#{bundle.CreateTicketTitle_estadoTicket}" />
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{ticketController.create}" value="Guardar"  oncomplete="handleSubmit(args,'ClienteCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="ClienteCreateDialog.hide()"/>
+                    <p:commandButton actionListener="#{ticketController.create}" value="Guardar" update="display,:SolicitudListForm:datalist,:growl" oncomplete="handleSubmit(args,'SolicitudCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SolicitudCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

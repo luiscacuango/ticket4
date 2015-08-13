@@ -21,11 +21,13 @@
                         <p:outputLabel value="#{bundle.EditTicketLabel_feciniTicket}" for="feciniTicket" />
                         <p:calendar id="feciniTicket" disabled="true" pattern="dd/MM/yyyy HH:mm:ss" value="#{ticketController.selected.feciniTicket}" title="#{bundle.EditTicketTitle_feciniTicket}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditTicketLabel_fecfinTicket}" for="fecfinTicket" />
-                        <p:calendar id="fecfinTicket" pattern="dd/MM/yyyy HH:mm:ss" value="#{ticketController.selected.fecfinTicket}" title="#{bundle.EditTicketTitle_fecfinTicket}"  showOn="button"/>
+                        <p:calendar id="fecfinTicket"  disabled="true" pattern="dd/MM/yyyy HH:mm:ss" value="#{ticketController.selected.fecfinTicket}" title="#{bundle.EditTicketTitle_fecfinTicket}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.EditTicketLabel_detalleTicket}" for="detalleTicket" />
-                        <p:inputText id="detalleTicket" disabled="true" value="#{ticketController.selected.detalleTicket}" title="#{bundle.EditTicketTitle_detalleTicket}" />
+                        <p:inputTextarea id="detalleTicket" disabled="true" value="#{ticketController.selected.detalleTicket}" title="#{bundle.EditTicketTitle_detalleTicket}" />
                         <p:outputLabel value="#{bundle.EditTicketLabel_obserTicket}" for="obserTicket" />
-                        <p:inputText id="obserTicket" value="#{ticketController.selected.obserTicket}" title="#{bundle.EditTicketTitle_obserTicket}" />
+                        <p:inputTextarea disabled="true" id="obserTicket" value="#{ticketController.selected.obserTicket}" title="#{bundle.EditTicketTitle_obserTicket}" />
+                        <p:outputLabel value="Observación Técnico:" for="obserTicketT" />
+                        <p:inputTextarea id="obserTicketT" maxlength="500" value="#{ticketController.selected.obserTicketT}" title="Observación del Técnico:" />
                         <p:outputLabel value="#{bundle.EditTicketLabel_estadoTicket}" for="estadoTicket" />
                         <p:inputText id="estadoTicket" disabled="true" value="#{ticketController.selected.estadoTicket='Finalizado'}" title="#{bundle.EditTicketTitle_estadoTicket}" />
                         <p:outputLabel value="#{bundle.EditTicketLabel_idDpto}" for="idDpto" />
